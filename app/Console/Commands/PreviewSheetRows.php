@@ -49,7 +49,7 @@ class PreviewSheetRows extends Command
         $serviceReflection = new \ReflectionClass($this->syncService);
         $sheetsProp = $serviceReflection->getProperty('sheetsService');
         $sheetsProp->setAccessible(true);
-        /** @var \Google_Service_Sheets $sheets */
+
         $sheets = $sheetsProp->getValue($this->syncService);
 
         $response = $sheets->spreadsheets_values->get($spreadsheetId, $range);
