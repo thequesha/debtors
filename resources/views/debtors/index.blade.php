@@ -22,10 +22,16 @@
     @endif
 
     <form method="POST" action="{{ route('debtors.sheet') }}" class="mb-3">
+
+
+
         @csrf
-        <div class="form-row align-items-center">
+        <div class="form-row align-items-top">
             <div class="col">
-                <input type="url" name="url" value="{{ $sheetUrl?->url }}" class="form-control" placeholder="Ссылка на Google Sheet" required>
+                <input type="url" name="url" value="{{ $sheetUrl?->url }}" class="form-control"
+                    placeholder="Ссылка на Google Sheet" required>
+                <small class="form-text text-muted">Перед использованием дайте доступ «Редактор» для
+                    sheet-bot@test-ad4c7.iam.gserviceaccount.com</small>
             </div>
             <div class="col-auto">
                 <button class="btn btn-success">Сохранить URL</button>

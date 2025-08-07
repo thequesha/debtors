@@ -17,6 +17,7 @@ class Debtor extends Model
     protected $fillable = [
         'name',
         'status',
+        'comment',
     ];
 
     /**
