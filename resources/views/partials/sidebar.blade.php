@@ -19,6 +19,12 @@
             ])
             <li class="nav-item nav-category">Главное</li>
 
+            @include('partials.sidebar.navItem', [
+                'name' => 'Должники',
+                'routeName' => 'debtors.index',
+                'icon' => 'users',
+            ])
+
             {{--          
 
             @if (auth()->user()->hasRole('Администратор'))

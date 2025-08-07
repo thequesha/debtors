@@ -10,6 +10,7 @@ use App\Http\Controllers\CarController;
 use App\Http\Controllers\DealController;
 use App\Http\Controllers\DealershipController;
 use App\Http\Controllers\DealStepController;
+use App\Http\Controllers\DebtorController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -49,6 +50,7 @@ Route::post('password/reset', [\App\Http\Controllers\Auth\SmsVerificationControl
 Route::middleware(['auth'])
     ->group(function () {
         Route::view('/', 'dashboard')->name('index');
+        Route::get('debtors', [DebtorController::class, 'index'])->name('debtors.index');
 
         // Brand management (available to all authenticated users)
 
