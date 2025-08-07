@@ -3,11 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Services\DebtorService;
+use App\Services\GoogleSheetUrlService;
 use Illuminate\Http\Request;
 
 class DebtorController extends Controller
 {
-    public function __construct(private DebtorService $debtors) {}
+    public function __construct(
+        private DebtorService $debtors,
+        private GoogleSheetUrlService $sheets,
+    ) {}
+
 
     /**
      * Display a paginated listing of debtors.
@@ -16,8 +21,9 @@ class DebtorController extends Controller
     {
         $perPage = (int) $request->get('per_page', 10);
         $debtors = $this->debtors->paginate($perPage);
+        $sheetUrl = $this->sheets->get();
 
-        return view('debtors.index', compact('debtors'));
+        return view('debtors.index', compact('debtors', 'sheetUrl'));
     }
 
     /**
@@ -34,6 +40,18 @@ class DebtorController extends Controller
     /**
      * Delete all debtors.
      */
+    public function saveSheetUrl(Request $request)
+    {
+        $validated = $request->validate([
+            'url' => 'required|url',
+        ]);
+
+        $this->sheets->save($validated['url']);
+
+        return redirect()->route('debtors.index')
+            ->with('success', 'URL сохранён.');
+    }
+
     public function clear()
     {
         $this->debtors->deleteAll();

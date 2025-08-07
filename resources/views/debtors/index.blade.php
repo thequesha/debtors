@@ -7,16 +7,31 @@
             @csrf
             <button type="submit" class="btn btn-primary mr-2">Создать 1000</button>
         </form>
-            <form method="POST" action="{{ route('debtors.clear') }}">
-                @csrf
-                <button type="submit" class="btn btn-danger" onclick="return confirm('Удалить всех должников?')">Удалить всех</button>
-            </form>
+        <form method="POST" action="{{ route('debtors.clear') }}">
+            @csrf
+            <button type="submit" class="btn btn-danger" onclick="return confirm('Удалить всех должников?')">Удалить
+                всех</button>
+        </form>
 
     </div>
+
+
 
     @if (session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
+
+    <form method="POST" action="{{ route('debtors.sheet') }}" class="mb-3">
+        @csrf
+        <div class="form-row align-items-center">
+            <div class="col">
+                <input type="url" name="url" value="{{ $sheetUrl?->url }}" class="form-control" placeholder="Ссылка на Google Sheet" required>
+            </div>
+            <div class="col-auto">
+                <button class="btn btn-success">Сохранить URL</button>
+            </div>
+        </div>
+    </form>
 
     <div class="card">
         <div class="card-body">
