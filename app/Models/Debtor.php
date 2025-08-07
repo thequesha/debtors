@@ -10,6 +10,14 @@ class Debtor extends Model
     use HasFactory;
 
     /**
+     * Local scope: only allowed debtors.
+     */
+    public function scopeAllowed($query)
+    {
+        return $query->where('status', 'allowed');
+    }
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>

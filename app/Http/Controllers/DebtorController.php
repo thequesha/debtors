@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\DebtorService;
+use App\Models\Debtor;
 use App\Services\GoogleSheetUrlService;
 use Illuminate\Http\Request;
 
@@ -43,13 +44,21 @@ class DebtorController extends Controller
     public function saveSheetUrl(Request $request)
     {
         $validated = $request->validate([
-            'url' => 'required|url',
+            'url' => ['required', 'url'],
         ]);
 
         $this->sheets->save($validated['url']);
 
-        return redirect()->route('debtors.index')
-            ->with('success', 'URL сохранён.');
+        return back()->with('success', 'URL сохранён.');
+    }
+
+    /**
+     * Remove the specified debtor.
+     */
+    public function destroy(Debtor $debtor)
+    {
+        $debtor->delete();
+        return back()->with('success', 'Должник удалён.');
     }
 
     public function clear()

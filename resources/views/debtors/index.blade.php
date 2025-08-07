@@ -47,6 +47,7 @@
                         <tr>
                             <th>Имя</th>
                             <th>Статус</th>
+                            <th>Действия</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -57,6 +58,13 @@
                                     <span class="badge badge-{{ $debtor->status === 'allowed' ? 'success' : 'danger' }}">
                                         {{ ucfirst($debtor->status) }}
                                     </span>
+                                </td>
+                                <td>
+                                    <form method="POST" action="{{ route('debtors.destroy', $debtor) }}" class="d-inline" onsubmit="return confirm('Удалить этого должника?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-sm btn-outline-danger">Удалить</button>
+                                    </form>
                                 </td>
                             </tr>
                         @empty
