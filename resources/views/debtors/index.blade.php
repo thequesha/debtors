@@ -3,9 +3,17 @@
 @section('content')
     <div class="page-header d-flex justify-content-between align-items-center mb-3">
         <h3 class="page-title mb-0">Должники</h3>
+        <form method="POST" action="{{ route('debtors.generate') }}" class="ml-auto">
+            @csrf
+            <button type="submit" class="btn btn-primary">Создать 1000</button>
+        </form>
 
 
     </div>
+
+    @if (session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
 
     <div class="card">
         <div class="card-body">

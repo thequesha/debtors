@@ -10,4 +10,9 @@ interface DebtorRepositoryInterface
      * Paginate debtors list.
      */
     public function paginate(int $perPage = 10): LengthAwarePaginator;
+
+    /**
+     * Bulk insert rows.
+     */
+    public function bulkInsert(array $rows): void;
 }

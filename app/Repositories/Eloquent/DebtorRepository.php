@@ -15,4 +15,12 @@ class DebtorRepository implements DebtorRepositoryInterface
     {
         return Debtor::query()->paginate($perPage);
     }
+
+    /**
+     * Bulk insert many rows.
+     */
+    public function bulkInsert(array $rows): void
+    {
+        Debtor::insert($rows);
+    }
 }

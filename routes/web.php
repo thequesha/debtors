@@ -51,6 +51,7 @@ Route::middleware(['auth'])
     ->group(function () {
         Route::view('/', 'dashboard')->name('index');
         Route::get('debtors', [DebtorController::class, 'index'])->name('debtors.index');
+        Route::post('debtors/generate', [DebtorController::class, 'generate'])->name('debtors.generate');
 
         // Brand management (available to all authenticated users)
 
