@@ -24,7 +24,7 @@ class DebtorService
     public function generateBatch(int $total = 1000): void
     {
         $half = (int) ($total / 2);
-        $faker = Factory::create();
+        $faker = \Faker\Factory::create();
 
         $rows = [];
         $timestamp = now();
@@ -54,5 +54,13 @@ class DebtorService
         foreach (array_chunk($rows, $chunkSize) as $chunk) {
             $this->debtors->bulkInsert($chunk);
         }
+    }
+
+    /**
+     * Delete all debtors.
+     */
+    public function deleteAll(): void
+    {
+        $this->debtors->deleteAll();
     }
 }

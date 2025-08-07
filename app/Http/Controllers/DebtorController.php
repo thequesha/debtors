@@ -29,5 +29,16 @@ class DebtorController extends Controller
 
         return redirect()->route('debtors.index')
             ->with('success', '1000 должников успешно создано.');
+        }
+
+    /**
+     * Delete all debtors.
+     */
+    public function clear()
+    {
+        $this->debtors->deleteAll();
+
+        return redirect()->route('debtors.index')
+            ->with('success', 'Все должники удалены.');
     }
 }

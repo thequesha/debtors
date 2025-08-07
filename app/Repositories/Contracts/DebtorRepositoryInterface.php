@@ -15,4 +15,9 @@ interface DebtorRepositoryInterface
      * Bulk insert rows.
      */
     public function bulkInsert(array $rows): void;
+
+    /**
+     * Delete all debtors.
+     */
+    public function deleteAll(): void;
 }

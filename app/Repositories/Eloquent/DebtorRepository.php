@@ -23,4 +23,12 @@ class DebtorRepository implements DebtorRepositoryInterface
     {
         Debtor::insert($rows);
     }
+
+    /**
+     * Delete all debtors.
+     */
+    public function deleteAll(): void
+    {
+        Debtor::truncate();
+    }
 }

@@ -5,9 +5,12 @@
         <h3 class="page-title mb-0">Должники</h3>
         <form method="POST" action="{{ route('debtors.generate') }}" class="ml-auto">
             @csrf
-            <button type="submit" class="btn btn-primary">Создать 1000</button>
+            <button type="submit" class="btn btn-primary mr-2">Создать 1000</button>
         </form>
-
+            <form method="POST" action="{{ route('debtors.clear') }}">
+                @csrf
+                <button type="submit" class="btn btn-danger" onclick="return confirm('Удалить всех должников?')">Удалить всех</button>
+            </form>
 
     </div>
 
