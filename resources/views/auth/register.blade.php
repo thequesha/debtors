@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>proautochina - Регистрация</title>
+    <title>debtors - Регистрация</title>
     <!-- core:css -->
     <link rel="stylesheet" href="{{ customAsset('admin/assets/vendors/sweetalert2/sweetalert2.min.css') }}">
     <link rel="stylesheet" href="{{ customAsset('admin/assets/vendors/core/core.css') }}">
@@ -51,7 +51,7 @@
                                 </div>
                                 <div class="col-md-8 pl-md-0">
                                     <div class="auth-form-wrapper px-4 py-5">
-                                        <a href="#" class="noble-ui-logo d-block mb-2">PRO<span>auto</span></a>
+                                        <a href="#" class="noble-ui-logo d-block mb-2">DEB<span>tors</span></a>
                                         <h5 class="text-muted font-weight-normal mb-4">Создать новый аккаунт</h5>
                                         @if (session('message'))
                                             <div class="alert alert-danger">
@@ -92,7 +92,8 @@
                                                 @enderror
                                             </div>
                                             <div class="form-group">
-                                                <label for="email">Электронная почта: <small class="text-muted">(необязательно)</small></label>
+                                                <label for="email">Электронная почта: <small
+                                                        class="text-muted">(необязательно)</small></label>
                                                 <input type="email" name="email"
                                                     style="background-color: #f5f5f5; color: #333 !important;"
                                                     class="form-control @error('email') is-invalid @enderror"
@@ -215,22 +216,22 @@
             });
         });
     </script>
-    
+
     <!-- OTP verification script -->
     <script>
         // Show OTP toast if exists in session
-        @if(session('otp'))
-        document.addEventListener('DOMContentLoaded', function() {
-            Swal.fire({
-                title: 'Код подтверждения',
-                text: 'Ваш код подтверждения: {{ session('otp') }}',
-                icon: 'info',
-                position: 'top-end',
-                toast: true,
-                showConfirmButton: false,
-                timer: 10000
+        @if (session('otp'))
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    title: 'Код подтверждения',
+                    text: 'Ваш код подтверждения: {{ session('otp') }}',
+                    icon: 'info',
+                    position: 'top-end',
+                    toast: true,
+                    showConfirmButton: false,
+                    timer: 10000
+                });
             });
-        });
         @endif
     </script>
 </body>

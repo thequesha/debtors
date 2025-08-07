@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
         $user =   User::updateOrCreate([
             'name' => 'Admin',
             'username' => 'admin',
-            'email' => 'admin@proautochina.com',
+            'email' => 'admin@debtors.com',
             'phone' => '',
             'password' => bcrypt('12345678'),
         ]);

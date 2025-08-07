@@ -23,7 +23,7 @@ use RuntimeException;
 class User extends Authenticatable implements HasMedia, MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable, HasRoles, InteractsWithMedia, SoftDeletes, HasFilter;
-    
+
     /**
      * Send the email verification notification.
      *

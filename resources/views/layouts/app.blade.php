@@ -3,7 +3,7 @@
 
 <head>
     @include('layouts.sections.meta')
-    <title>@yield('title') | proautochina</title>
+    <title>@yield('title') | debtors</title>
     @include('layouts.sections.favicon')
     @include('layouts.sections.links')
     @stack('css')

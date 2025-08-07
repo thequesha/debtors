@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>proautochina - Восстановление пароля</title>
+    <title>debtors - Восстановление пароля</title>
     <!-- core:css -->
     <link rel="stylesheet" href="{{ customAsset('admin/assets/vendors/sweetalert2/sweetalert2.min.css') }}">
     <link rel="stylesheet" href="{{ customAsset('admin/assets/vendors/core/core.css') }}">
@@ -50,14 +50,15 @@
                                 </div>
                                 <div class="col-md-8 pl-md-0">
                                     <div class="auth-form-wrapper px-4 py-5">
-                                        <a href="#" class="noble-ui-logo d-block mb-2">PRO<span>auto</span></a>
+                                        <a href="#" class="noble-ui-logo d-block mb-2">DEB<span>tors</span></a>
                                         <h5 class="text-muted font-weight-normal mb-4">Восстановление пароля</h5>
                                         @if (session('message'))
                                             <div class="alert alert-danger">
                                                 {{ session('message') }}
                                             </div>
                                         @endif
-                                        <form id="reset-form" method="post" action="{{ route('password.update') }}" class="forms-sample">
+                                        <form id="reset-form" method="post" action="{{ route('password.update') }}"
+                                            class="forms-sample">
                                             @csrf
                                             <div class="form-group">
                                                 <label for="phone">Номер телефона:</label>
@@ -70,7 +71,7 @@
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
                                             </div>
-                                            
+
                                             <!-- OTP section (hidden initially) -->
                                             <div id="otp-section" style="display: none;">
                                                 <div class="form-group">
@@ -83,7 +84,7 @@
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                                 </div>
-                                                
+
                                                 <!-- Password fields (shown after OTP is sent) -->
                                                 <div class="form-group">
                                                     <label for="password">Новый пароль:</label>
@@ -131,13 +132,18 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            
-                                            <div class="mt-3 d-flex flex-row justify-content-between align-items-center">
+
+                                            <div
+                                                class="mt-3 d-flex flex-row justify-content-between align-items-center">
                                                 <div>
-                                                    <button type="button" id="send-code-btn" class="btn btn-primary mr-2 mb-2 mb-md-0 text-white">Получить код</button>
-                                                    <button type="submit" id="submit-btn" style="display: none;" class="btn btn-success mr-2 mb-2 mb-md-0 text-white">Сохранить пароль</button>
+                                                    <button type="button" id="send-code-btn"
+                                                        class="btn btn-primary mr-2 mb-2 mb-md-0 text-white">Получить
+                                                        код</button>
+                                                    <button type="submit" id="submit-btn" style="display: none;"
+                                                        class="btn btn-success mr-2 mb-2 mb-md-0 text-white">Сохранить
+                                                        пароль</button>
                                                 </div>
-                                                
+
                                                 <div>
                                                     <a href="{{ route('login') }}" class="d-block">Вернуться</a>
                                                 </div>
@@ -158,7 +164,7 @@
     <script src="{{ customAsset('admin/assets/vendors/sweetalert2/sweetalert2.min.js') }}"></script>
     <script src="{{ customAsset('admin/assets/vendors/inputmask/jquery.inputmask.min.js') }}"></script>
     <script src="{{ customAsset('admin/assets/vendors/feather-icons/feather.min.js') }}"></script>
-    
+
     <script>
         document.addEventListener("DOMContentLoaded", function(event) {
             console.log("DOM fully loaded and parsed");
@@ -168,7 +174,7 @@
 
             // Phone mask initialization
             $('.phone-mask').inputmask('+7 999 9999999');
-            
+
             // Password toggle functionality
             document.getElementById('togglePassword').addEventListener('click', function() {
                 const passwordInput = document.getElementById('password');
@@ -206,7 +212,7 @@
             // Send code button functionality
             document.getElementById('send-code-btn').addEventListener('click', function(e) {
                 e.preventDefault();
-                
+
                 const phone = document.getElementById('phone').value;
                 if (!phone || phone.includes('_')) {
                     Swal.fire({
@@ -220,10 +226,10 @@
                     });
                     return;
                 }
-                
+
                 // Generate dummy OTP
                 const otp = Math.floor(1000 + Math.random() * 9000);
-                
+
                 // Show OTP as toast
                 Swal.fire({
                     title: 'Код отправлен',
@@ -234,27 +240,27 @@
                     showConfirmButton: false,
                     timer: 5000
                 });
-                
+
                 // Populate OTP field
                 document.getElementById('otp').value = otp;
-                
+
                 // Show OTP section and password fields
                 document.getElementById('otp-section').style.display = 'block';
-                
+
                 // Hide send code button and show submit button
                 this.style.display = 'none';
                 document.getElementById('submit-btn').style.display = 'inline-block';
-                
+
                 // Disable phone field
                 document.getElementById('phone').readOnly = true;
             });
-            
+
             // Form submission validation
             document.getElementById('reset-form').addEventListener('submit', function(e) {
                 const otp = document.getElementById('otp').value;
                 const password = document.getElementById('password').value;
                 const passwordConfirmation = document.getElementById('password_confirmation').value;
-                
+
                 // Validate OTP
                 if (!otp || otp.length !== 4 || isNaN(otp)) {
                     e.preventDefault();
@@ -269,7 +275,7 @@
                     });
                     return;
                 }
-                
+
                 // Validate password
                 if (!password || password.length < 8) {
                     e.preventDefault();
@@ -284,7 +290,7 @@
                     });
                     return;
                 }
-                
+
                 // Validate password confirmation
                 if (password !== passwordConfirmation) {
                     e.preventDefault();
@@ -300,24 +306,24 @@
                     return;
                 }
             });
-            
+
             // Show OTP toast if exists in session
-            @if(session('otp'))
-            Swal.fire({
-                title: 'Код подтверждения',
-                text: 'Ваш код подтверждения: {{ session('otp') }}',
-                icon: 'info',
-                position: 'top-end',
-                toast: true,
-                showConfirmButton: false,
-                timer: 10000
-            });
-            
-            // Show OTP section if OTP is in session
-            document.getElementById('otp-section').style.display = 'block';
-            document.getElementById('send-code-btn').style.display = 'none';
-            document.getElementById('submit-btn').style.display = 'inline-block';
-            document.getElementById('phone').readOnly = true;
+            @if (session('otp'))
+                Swal.fire({
+                    title: 'Код подтверждения',
+                    text: 'Ваш код подтверждения: {{ session('otp') }}',
+                    icon: 'info',
+                    position: 'top-end',
+                    toast: true,
+                    showConfirmButton: false,
+                    timer: 10000
+                });
+
+                // Show OTP section if OTP is in session
+                document.getElementById('otp-section').style.display = 'block';
+                document.getElementById('send-code-btn').style.display = 'none';
+                document.getElementById('submit-btn').style.display = 'inline-block';
+                document.getElementById('phone').readOnly = true;
             @endif
         });
     </script>

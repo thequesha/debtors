@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>proautochina</title>
+    <title>debtors</title>
     <!-- core:css -->
     <link rel="stylesheet" href="{{ customAsset('admin/assets/vendors/sweetalert2/sweetalert2.min.css') }}">
     <link rel="stylesheet" href="{{ customAsset('admin/assets/vendors/core/core.css') }}">
@@ -51,7 +51,7 @@
                                 </div>
                                 <div class="col-md-8 pl-md-0">
                                     <div class="auth-form-wrapper px-4 py-5">
-                                        <a href="#" class="noble-ui-logo d-block mb-2">PRO<span>auto</span></a>
+                                        <a href="#" class="noble-ui-logo d-block mb-2">DEB<span>tors</span></a>
                                         @if (session('message'))
                                             <div class="alert alert-danger">
                                                 {{ session('message') }}
@@ -132,7 +132,8 @@
                     <form id="resetPasswordForm">
                         <div class="form-group">
                             <label for="reset-phone">Введите номер телефона:</label>
-                            <input type="text" class="form-control phone-mask" id="reset-phone" name="reset-phone" required>
+                            <input type="text" class="form-control phone-mask" id="reset-phone" name="reset-phone"
+                                required>
                         </div>
                     </form>
                 </div>
@@ -194,13 +195,13 @@
                     });
                     return;
                 }
-                
+
                 // Generate dummy OTP
                 const otp = Math.floor(1000 + Math.random() * 9000);
-                
+
                 // Close modal
                 $('#contactModal').modal('hide');
-                
+
                 // Show OTP as toast
                 Swal.fire({
                     title: 'Код отправлен',
@@ -212,18 +213,18 @@
                     timer: 5000
                 });
             });
-            
+
             // Show OTP toast if exists in session
-            @if(session('otp'))
-            Swal.fire({
-                title: 'Код подтверждения',
-                text: 'Ваш код подтверждения: {{ session('otp') }}',
-                icon: 'info',
-                position: 'top-end',
-                toast: true,
-                showConfirmButton: false,
-                timer: 10000
-            });
+            @if (session('otp'))
+                Swal.fire({
+                    title: 'Код подтверждения',
+                    text: 'Ваш код подтверждения: {{ session('otp') }}',
+                    icon: 'info',
+                    position: 'top-end',
+                    toast: true,
+                    showConfirmButton: false,
+                    timer: 10000
+                });
             @endif
         });
     </script>

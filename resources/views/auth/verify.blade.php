@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>proautochina - Подтверждение электронной почты</title>
+    <title>debtors - Подтверждение электронной почты</title>
     <!-- core:css -->
     <link rel="stylesheet" href="{{ customAsset('admin/assets/vendors/core/core.css') }}">
     <!-- endinject -->
@@ -66,10 +66,12 @@
                                         <p>Если вы не получили письмо, нажмите кнопку ниже, чтобы запросить повторную
                                             отправку.</p>
 
-                                        @if(auth()->check())
-                                            <form method="POST" action="{{ route('verification.resend') }}" class="mt-4">
+                                        @if (auth()->check())
+                                            <form method="POST" action="{{ route('verification.resend') }}"
+                                                class="mt-4">
                                                 @csrf
-                                                <button type="submit" class="btn btn-primary mr-2 mb-2 mb-md-0 text-white">
+                                                <button type="submit"
+                                                    class="btn btn-primary mr-2 mb-2 mb-md-0 text-white">
                                                     Отправить повторно
                                                 </button>
                                             </form>
@@ -83,11 +85,14 @@
                                                 </form>
                                             </div>
                                         @else
-                                            @if(session('email_for_verification'))
-                                                <form method="POST" action="{{ route('verification.resend-guest') }}" class="mt-4">
+                                            @if (session('email_for_verification'))
+                                                <form method="POST" action="{{ route('verification.resend-guest') }}"
+                                                    class="mt-4">
                                                     @csrf
-                                                    <input type="hidden" name="email" value="{{ session('email_for_verification') }}">
-                                                    <button type="submit" class="btn btn-primary mr-2 mb-2 mb-md-0 text-white">
+                                                    <input type="hidden" name="email"
+                                                        value="{{ session('email_for_verification') }}">
+                                                    <button type="submit"
+                                                        class="btn btn-primary mr-2 mb-2 mb-md-0 text-white">
                                                         Отправить повторно
                                                     </button>
                                                 </form>

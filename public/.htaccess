@@ -6,8 +6,8 @@
     RewriteEngine On
     
     # Set the base directory
-    RewriteCond %{REQUEST_URI} ^/proautochina/public/
-    RewriteRule ^proautochina/public/(.*)$ /proautochina/public/$1 [L]
+    RewriteCond %{REQUEST_URI} ^/debtors/public/
+    RewriteRule ^debtors/public/(.*)$ /debtors/public/$1 [L]
     
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .

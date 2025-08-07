@@ -19,7 +19,6 @@ class RoleSeeder extends Seeder
             'Super-Admin',
             'Администратор',
             'Пользователь',
-
         ];
 
         foreach ($roles as $role) {
@@ -29,7 +28,7 @@ class RoleSeeder extends Seeder
         // Assign all permissions to Super-Admin
         $permissions = Permission::all();
         Role::findByName('Super-Admin')->givePermissionTo($permissions);
-        
+
         // Assign specific permissions to Администратор
         Role::findByName('Администратор')->givePermissionTo('manage users');
     }
