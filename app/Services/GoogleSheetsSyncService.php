@@ -46,14 +46,15 @@ class GoogleSheetsSyncService
             }
 
             foreach ($values as $row) {
-                if (count($row) < 3) {
-                    continue;
+                if (count($row) < 1) {
+                    continue; // row without ID
                 }
-                [$id,, $comment] = $row;
+                $id = $row[0];
+                $comment = $row[2] ?? null;
                 if (!is_numeric($id)) {
                     continue;
                 }
-                Debtor::where('id', (int)$id)->update(['comment' => $comment]);
+                Debtor::where('id', (int)$id)->update(['comment' => $comment ?? null]);
             }
         } catch (\Throwable $e) {
             Log::error('Sheets import error: ' . $e->getMessage());
@@ -63,13 +64,16 @@ class GoogleSheetsSyncService
     /**
      * Export allowed debtors to sheet, overwriting existing data.
      */
-    public function exportAllowed(string $spreadsheetId, string $range = null): void
+    public function exportAllowed(string $spreadsheetId, ?string $range = null): void
     {
         $range ??= Config::get('google.sheet_range', 'A:C');
         $debtors = Debtor::allowed()->get(['id', 'name', 'comment']);
         $values = $debtors->map(fn($d) => [$d->id, $d->name, $d->comment])->toArray();
 
         try {
+            // Clear existing values first
+            $this->sheetsService->spreadsheets_values->clear($spreadsheetId, $range, new Sheets\ClearValuesRequest());
+
             $body = new Sheets\ValueRange([
                 'values' => $values,
             ]);

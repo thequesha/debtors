@@ -54,6 +54,8 @@ Route::middleware(['auth'])
         Route::post('debtors/generate', [DebtorController::class, 'generate'])->name('debtors.generate');
         Route::post('debtors/clear', [DebtorController::class, 'clear'])->name('debtors.clear');
         Route::delete('debtors/{debtor}', [DebtorController::class, 'destroy'])->name('debtors.destroy');
+        Route::patch('debtors/{debtor}/toggle', [DebtorController::class, 'toggle'])->name('debtors.toggle');
+        Route::get('fetch/{count?}', [\App\Http\Controllers\SheetController::class, 'fetch'])->where('count', '[0-9]+')->name('sheet.fetch');
         Route::post('debtors/sheet-url', [DebtorController::class, 'saveSheetUrl'])->name('debtors.sheet');
 
         // Brand management (available to all authenticated users)

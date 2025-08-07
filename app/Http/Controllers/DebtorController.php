@@ -11,7 +11,7 @@ class DebtorController extends Controller
 {
     public function __construct(
         private DebtorService $debtors,
-        private GoogleSheetUrlService $sheets,
+        private GoogleSheetUrlService $sheetUrlService,
     ) {}
 
 
@@ -22,7 +22,7 @@ class DebtorController extends Controller
     {
         $perPage = (int) $request->get('per_page', 10);
         $debtors = $this->debtors->paginate($perPage);
-        $sheetUrl = $this->sheets->get();
+        $sheetUrl = $this->sheetUrlService->get();
 
         return view('debtors.index', compact('debtors', 'sheetUrl'));
     }
@@ -47,9 +47,21 @@ class DebtorController extends Controller
             'url' => ['required', 'url'],
         ]);
 
-        $this->sheets->save($validated['url']);
+        $this->sheetUrlService->save($validated['url']);
 
         return back()->with('success', 'URL сохранён.');
+    }
+
+    /**
+     * Toggle debtor status allowed/prohibited.
+     */
+    public function toggle(Debtor $debtor)
+    {
+        $debtor->update([
+            'status' => $debtor->status === 'allowed' ? 'prohibited' : 'allowed',
+        ]);
+
+        return back()->with('success', 'Статус изменён.');
     }
 
     /**

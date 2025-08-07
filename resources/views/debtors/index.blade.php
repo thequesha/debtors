@@ -46,6 +46,7 @@
                     <thead>
                         <tr>
                             <th>Имя</th>
+                            <th>Комментарий</th>
                             <th>Статус</th>
                             <th>Действия</th>
                         </tr>
@@ -54,13 +55,23 @@
                         @forelse($debtors as $debtor)
                             <tr>
                                 <td>{{ $debtor->name }}</td>
+                                <td>{{ $debtor->comment }}</td>
                                 <td>
-                                    <span class="badge badge-{{ $debtor->status === 'allowed' ? 'success' : 'danger' }}">
-                                        {{ ucfirst($debtor->status) }}
-                                    </span>
+                                    <form method="POST" action="{{ route('debtors.toggle', $debtor) }}" class="d-inline">
+                                        @csrf
+                                        @method('PATCH')
+                                        <button class="btn btn-link p-0 border-0">
+                                            {{-- {{ ucfirst($debtor->status) }} --}}
+                                            <span
+                                                class="badge badge-{{ $debtor->status === 'allowed' ? 'success' : 'danger' }}">
+                                                {{ ucfirst($debtor->status) }}
+                                            </span>
+                                        </button>
+                                    </form>
                                 </td>
                                 <td>
-                                    <form method="POST" action="{{ route('debtors.destroy', $debtor) }}" class="d-inline" onsubmit="return confirm('Удалить этого должника?');">
+                                    <form method="POST" action="{{ route('debtors.destroy', $debtor) }}" class="d-inline"
+                                        onsubmit="return confirm('Удалить этого должника?');">
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-sm btn-outline-danger">Удалить</button>
